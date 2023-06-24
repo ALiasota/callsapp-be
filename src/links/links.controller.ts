@@ -18,7 +18,8 @@ export class LinksController {
 
   @Get()
   async getLinks() {
-    return await this.linkService.findAllLinks();
+    const links = await this.linkService.findAllLinks();
+    return links;
   }
 
   @Get('/:id')
@@ -48,6 +49,6 @@ export class LinksController {
     const response = await this.linkService.deleteLink(Number(id));
     if (!response.affected)
       throw new HttpException('Link not found', HttpStatus.NOT_FOUND);
-    return 'Link was deleted successfully';
+    return { message: 'Link was deleted successfully' };
   }
 }
